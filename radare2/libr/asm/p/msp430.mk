@@ -1,0 +1,13 @@
+OBJ_MSP430=asm_msp430.o
+OBJ_MSP430+=$(LIBR)/asm/arch/msp430/msp430_disas.o
+CFLAGS+=-I$(LIBR)/asm/arch/msp430/
+
+STATIC_OBJ+=${OBJ_MSP430}
+TARGET_MSP430=asm_msp430.${EXT_SO}
+
+ifeq ($(WITHPIC),1)
+ALL_TARGETS+=${TARGET_MSP430}
+
+${TARGET_MSP430}: ${OBJ_MSP430}
+	${CC} ${LDFLAGS} ${CFLAGS} -o ${TARGET_MSP430} ${OBJ_MSP430}
+endif
